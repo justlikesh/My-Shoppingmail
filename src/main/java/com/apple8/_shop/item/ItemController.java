@@ -17,9 +17,11 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
+
     private final ItemRepository itemRepository;
     private final ItemService itemService;
     private final MemberRepository memberRepository;
+    private final S3Service s3Service;
 
     @GetMapping("/list")                //list 요청이들어오면 GET메서드
     String list(Model model){        //model 접시에 담아서
@@ -110,6 +112,14 @@ public class ItemController {
         model.addAttribute("items", result);
 
         return "list";
+    }
+
+    @GetMapping("/presigned-url")
+    @ResponseBody
+    String getURL(@RequestParam String filename){
+        var result = s3Service.createPresignedUrl("test/1" + filename);
+        System.out.println(result);
+        return result;
     }
 
 //    @GetMapping("/list/page/2")
