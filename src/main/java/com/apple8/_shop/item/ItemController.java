@@ -3,6 +3,8 @@ package com.apple8._shop.item;
 import com.apple8._shop.member.Member;
 import com.apple8._shop.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -101,6 +103,22 @@ public class ItemController {
         System.out.println(result);
         return "redirect:/list";
     }
+
+    @GetMapping("/list/page/{abc}")
+    String getListPage(Model model, @PathVariable Integer abc){
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(abc-1,5));  // 몇번째 페이지, 페이지당 몇개 페이지는 0부터 시작
+        model.addAttribute("items", result);
+
+        return "list";
+    }
+
+//    @GetMapping("/list/page/2")
+//    String getListPage2(Model model){
+//        Page<Item> result = itemRepository.findPageBy(PageRequest.of(1,5));  // 몇번째 페이지, 페이지당 몇개 페이지는 0부터 시작
+//        model.addAttribute("items", result);
+//
+//        return "list";
+//    }
 
 
 
