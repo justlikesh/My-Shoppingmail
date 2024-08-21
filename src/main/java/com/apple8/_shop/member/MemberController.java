@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,5 +47,26 @@ public class MemberController {
         CustomUser result = (CustomUser) auth.getPrincipal();
         System.out.println(auth.getPrincipal());
         return "mypage";
+    }
+
+    @GetMapping("/user/1")
+    @ResponseBody
+    public MemberDto getUser(){
+        var a = memberRepository.findById(1);
+        var result = a.get();
+        var data = new MemberDto(result.getUsername(), result.getDisplayName());
+//        data.username = result.getUsername();
+//        data.displayName = result.getDisplayName();
+        return data;
+    }
+}
+
+class MemberDto {
+    public String username;        //public 이 붙어있어야 json 으로 변환가능
+    public String displayName;                  // dto 쓰면 장점
+                                                // 1. 보내는 데이터의 타입체크가 쉬움
+    MemberDto(String a, String b){              // 2. 재사용이 쉬움
+        this.username = a;
+        this.displayName = b;
     }
 }
