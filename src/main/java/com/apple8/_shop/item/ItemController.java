@@ -105,12 +105,12 @@ public class ItemController {
     @PostMapping("/member")
     String addMember(@RequestParam String username,
                      @RequestParam String password,
-                     @RequestParam String displayname){
+                     @RequestParam String displayName){
         Member member = new Member();
         member.setUsername(username);
         String hash = new BCryptPasswordEncoder().encode(password);  //password 해싱
         member.setPassword(hash);
-        member.setDisplayName(displayname);
+        member.setDisplayName(displayName);
         memberRepository.save(member);  //save() 메소드는 새로운 엔티티를 저장하거나, 기존 엔티티를 업데이트하는 작업을 수행합니다.
         return "redirect:/list";
     }
