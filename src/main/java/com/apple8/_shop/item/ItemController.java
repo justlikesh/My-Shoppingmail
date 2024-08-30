@@ -1,5 +1,7 @@
 package com.apple8._shop.item;
 
+import com.apple8._shop.member.Member;
+import com.apple8._shop.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class ItemController {
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/list")                //list 요청이들어오면 GET메서드
     String list(Model model){        //model 접시에 담아서
@@ -94,10 +97,26 @@ public class ItemController {
 
     @GetMapping("/test2")
     String deleteItem(){
-        var result = new BCryptPasswordEncoder().encode("문자~~");
+        var result = new BCryptPasswordEncoder().encode("문자~~");    // 랜덤문자로 저장해서 변환하는것을 해싱 이라고한다
         System.out.println(result);
         return "redirect:/list";
     }
-    // 랜덤문자로 저장해서 변환하는것을 해싱 이라고한다
+
+    @PostMapping("/member")
+    String addMember(@RequestParam String username,
+                     @RequestParam String password,
+                     @RequestParam String displayname){
+        Member member = new Member();
+        member.setUsername(username);
+        String hash = new BCryptPasswordEncoder().encode(password);  //password 해싱
+        member.setPassword(hash);
+        member.setDisplayName(displayname);
+        memberRepository.save(member);  //save() 메소드는 새로운 엔티티를 저장하거나, 기존 엔티티를 업데이트하는 작업을 수행합니다.
+        return "redirect:/list";
+    }
+
+
+
+
 
 }
