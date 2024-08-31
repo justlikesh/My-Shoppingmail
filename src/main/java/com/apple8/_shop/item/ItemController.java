@@ -2,6 +2,7 @@ package com.apple8._shop.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -90,5 +91,13 @@ public class ItemController {
         itemRepository.deleteById(id);
         return ResponseEntity.status(200).body("삭제완료");    //ajax 로 데이터 주고받을때는 redirect 가 안된다
     }
-//    itemRepository.save()
+
+    @GetMapping("/test2")
+    String deleteItem(){
+        var result = new BCryptPasswordEncoder().encode("문자~~");
+        System.out.println(result);
+        return "redirect:/list";
+    }
+    // 랜덤문자로 저장해서 변환하는것을 해싱 이라고한다
+
 }
