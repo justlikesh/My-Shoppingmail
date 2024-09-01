@@ -9,7 +9,8 @@
 
 <div th:replace="~{nav.html::navbar}"></div>
 
-<form>
+<form action="/edit" method="POST"> <!-- form 태그는 GET, POST 만가능-->
+    <input name = "id" th:value="${data.id}" style="display:none">  <!-- display-none : 사용자가 못건들게 숨기기-->
     <input name = "title" th:value="${data.title}">  <!-- 서버에서 보낸 데이터 넣어줌 th:value 는 input 에 미리 입력된 값을 가져옴-->
     <input name = "price" th:value="${data.price}">
     <button type="submit">전송</button>

@@ -65,5 +65,17 @@ public class ItemController {
         }
     }
 
+    @PostMapping("/edit")
+    String editItem(@RequestParam String title,
+                    @RequestParam Integer price,
+                    @RequestParam Integer id){
+        Item item = new Item();                  // 서버가 모르는 정보는 유저에게 보내라고하거나, DB조회해보거나
+        item.setId(id);                            //id가 1인 값이 없으면 새로만들어주고 있으면 이값들로 수정해준다
+        item.setTitle(title);                    // jpa 의 대표적인 방법
+        item.setPrice(price);
+        itemRepository.save(item);
+
+        return "redirect:/list";
+    }
 //    itemRepository.save()
 }
