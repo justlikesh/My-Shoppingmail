@@ -1,13 +1,10 @@
 package com.apple8._shop;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,15 +41,29 @@ public class ItemController {
     }
 
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable Integer id, Model model) throws Exception{
-        throw new Exception();
+    String detail(@PathVariable Integer id, Model model) {
+//        throw new Exception();
 
-//        Optional<Item> result = itemRepository.findById(id);     // id가 1인 행을 찾아온다
-//        if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
-//            model.addAttribute("data", result.get());
-//            return "detail";
-//        } else {
-//            return "redirect://list";
-//        }
+        Optional<Item> result = itemRepository.findById(id);     // id가 1인 행을 찾아온다
+        if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
+            model.addAttribute("data", result.get());
+            return "detail";
+        } else {
+            return "redirect://list";
+        }
     }
+
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable Integer id, Model model){
+
+        Optional<Item> result = itemRepository.findById(id);          //optional 이기때문에 item 또는 텅 빈값이 나올수 있따.
+        if (result.isPresent()){
+            model.addAttribute("data", result.get());
+            return "edit";
+        } else {
+            return "redirect://list";
+        }
+    }
+
+//    itemRepository.save()
 }
