@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @GetMapping("/list")                //list 요청이들어오면 GET메서드
     String list(Model model){        //model 접시에 담아서
@@ -36,12 +37,8 @@ public class ItemController {
     @PostMapping("/add")
     String addPost(@RequestParam String title,
                    @RequestParam Integer price)  {
-
-        Item item = new Item();
-        item.setTitle(title);
-        item.setPrice(price);
-        itemRepository.save(item);
-
+//        new ItemService().saveItem(title, price);       이런식으로 매번 api 요청마다 객체를 만들면 메모리적으로 비효율 적이다
+        itemService.saveItem(title, price);
 
         return "redirect:/list";
     }
