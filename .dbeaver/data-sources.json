@@ -1,0 +1,59 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-19111e09e62-6c9ab2100355dfee": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "codingapplemysql22.mysql.database.azure.com",
+			"save-password": true,
+			"configuration": {
+				"host": "codingapplemysql22.mysql.database.azure.com",
+				"port": "3306",
+				"url": "jdbc:mysql://codingapplemysql22.mysql.database.azure.com:3306/",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"auth-model": "native"
+			}
+		},
+		"mysql8-191a1d92d09-42e295daebbd60ed": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "example",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "33066",
+				"database": "example",
+				"url": "jdbc:mysql://localhost:33066/example",
+				"configurationType": "MANUAL",
+				"home": "/Users/gimseungho/Desktop/ASAC/sh_backend_server",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"properties": {
+					"connectTimeout": "20000",
+					"rewriteBatchedStatements": "true",
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2,TLSv1.3",
+					"allowPublicKeyRetrieval": "true"
+				},
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": true,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}
