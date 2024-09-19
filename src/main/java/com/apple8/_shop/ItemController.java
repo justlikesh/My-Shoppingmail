@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,5 +42,15 @@ public class ItemController {
         itemRepository.save(item);
 
         return "redirect:/list";
+    }
+
+    @GetMapping("/detail/{id}")
+    String detail(@PathVariable Integer id){
+        Optional<Item> result = itemRepository.findById(1);     // id가 1인 행을 찾아온다
+        if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
+            System.out.println(result.get());
+        }
+
+        return "detail.html";
     }
 }
