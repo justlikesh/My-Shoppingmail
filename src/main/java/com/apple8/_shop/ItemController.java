@@ -2,6 +2,7 @@ package com.apple8._shop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,14 +47,15 @@ public class ItemController {
     }
 
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable Integer id, Model model){
-        Optional<Item> result = itemRepository.findById(id);     // id가 1인 행을 찾아온다
-        if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
-            model.addAttribute("data", result.get());
-            return "detail";
-        } else {
-            return "redirect://list";
-        }
+    String detail(@PathVariable Integer id, Model model) throws Exception{
+        throw new Exception();
 
+//        Optional<Item> result = itemRepository.findById(id);     // id가 1인 행을 찾아온다
+//        if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
+//            model.addAttribute("data", result.get());
+//            return "detail";
+//        } else {
+//            return "redirect://list";
+//        }
     }
 }
