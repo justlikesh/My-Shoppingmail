@@ -34,23 +34,26 @@ public class ItemController {
 
     @PostMapping("/add")
     String addPost(@RequestParam String title,
-                   @RequestParam Integer price){
+                   @RequestParam Integer price)  {
 
         Item item = new Item();
         item.setTitle(title);
         item.setPrice(price);
         itemRepository.save(item);
 
+
         return "redirect:/list";
     }
 
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable Integer id){
-        Optional<Item> result = itemRepository.findById(1);     // id가 1인 행을 찾아온다
+    String detail(@PathVariable Integer id, Model model){
+        Optional<Item> result = itemRepository.findById(id);     // id가 1인 행을 찾아온다
         if(result.isPresent()){                                 // result 가 비어있을수도있으니 isPresent 로 예외처리 꼭해주기 !!!
-            System.out.println(result.get());
+            model.addAttribute("data", result.get());
+            return "detail";
+        } else {
+            return "redirect://list";
         }
 
-        return "detail.html";
     }
 }
