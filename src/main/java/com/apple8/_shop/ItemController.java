@@ -36,9 +36,12 @@ public class ItemController {
 
     @PostMapping("/add")
     String addPost(@RequestParam String title,
-                   @RequestParam String price){
-        System.out.println(title);
-        System.out.println(price);
+                   @RequestParam Integer price){
+
+        Item item = new Item();
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepository.save(item);
 
         return "redirect:/list";
     }
