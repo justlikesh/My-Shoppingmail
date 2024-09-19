@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -25,7 +27,19 @@ public class ItemController {
         var a = new Item();
         System.out.print(a.toString());
         return "list";
+    }
 
+    @GetMapping("/write")
+    String write(){
+        return "write";
+    }
 
+    @PostMapping("/add")
+    String addPost(@RequestParam String title,
+                   @RequestParam String price){
+        System.out.println(title);
+        System.out.println(price);
+
+        return "redirect:/list";
     }
 }
