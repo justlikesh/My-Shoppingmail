@@ -17,7 +17,15 @@
         <a th:href ="@{'/detail/'+${i.id}}">링크</a>
         <p th:text="${i.price + '원'}">7억</p>
         <a th:href="@{'/edit/' + ${i.id}}" >✏️</a>
-    </div>
+        <span th:onclick="fetch('/item?id= [[${i.id}]]', { method : 'DELETE' } )
+            .then(r => r.text())
+            .then(() => {
+                location.reload();
+            })
+
+
+">🗑️</span> <!--delete 요청시 body 는 잘 전달이 안됌 -->     <!-- .then() 붙이면 ajax 요청 완료시 코드실행 가능-->
+    </div>   <!-- 서버에서 보내주는 자료가 array, map 이다 그럼 json 서버에서 보내주는 자료가 문자다 그럼 text -->
 </div>
 <button class="btn">버튼</button>
 

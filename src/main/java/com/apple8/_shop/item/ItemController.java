@@ -1,6 +1,7 @@
 package com.apple8._shop.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -82,6 +83,12 @@ public class ItemController {
     String test1(@RequestBody Map<String, Object> body){
         System.out.println(body);
         return "redirect:/list";
+    }
+
+    @DeleteMapping("/item")
+    ResponseEntity<String> deleteItem(@RequestParam Integer id){
+        itemRepository.deleteById(id);
+        return ResponseEntity.status(200).body("삭제완료");    //ajax 로 데이터 주고받을때는 redirect 가 안된다
     }
 //    itemRepository.save()
 }
