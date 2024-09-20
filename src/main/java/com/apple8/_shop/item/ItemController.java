@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -74,6 +75,12 @@ public class ItemController {
         item.setPrice(price);
         itemRepository.save(item);
 
+        return "redirect:/list";
+    }
+
+    @PostMapping("/test1")
+    String test1(@RequestBody Map<String, Object> body){
+        System.out.println(body);
         return "redirect:/list";
     }
 //    itemRepository.save()
