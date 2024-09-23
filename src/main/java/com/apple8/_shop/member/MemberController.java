@@ -43,9 +43,8 @@ public class MemberController {
     }
     @GetMapping("/my-page")
     public String mypage(Authentication auth){
-        System.out.println(auth.getAuthorities().contains(
-                new SimpleGrantedAuthority("일반유저")
-        ));
+        CustomUser result = (CustomUser) auth.getPrincipal();
+        System.out.println(auth.getPrincipal());
         return "mypage";
     }
 }
