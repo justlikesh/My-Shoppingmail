@@ -32,4 +32,11 @@ public class MemberController {
         memberRepository.save(member);  //save() 메소드는 새로운 엔티티를 저장하거나, 기존 엔티티를 업데이트하는 작업을 수행합니다.
         return "redirect:/list";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        var result = memberRepository.findAllByUsername("sdf");
+        System.out.println(result.get().getDisplayName());
+        return "login";
+    }
 }

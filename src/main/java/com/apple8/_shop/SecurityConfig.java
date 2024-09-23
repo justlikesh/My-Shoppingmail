@@ -24,6 +24,12 @@ public class SecurityConfig {
         http.authorizeHttpRequests((authorize) ->
                 authorize.requestMatchers("/**").permitAll()       // 로그인 여부 상관없이 항상 허용,    ** = 모든 url
         );
+
+        http.formLogin((formLogin)                              //폼으로 로그인하겠음
+                -> formLogin.loginPage("/login")                //로그인 을위한 폼은 어딨나요? 로그인 URL
+                .defaultSuccessUrl("/")                         //로그인 성공시 이동할 URL
+//                .failureUrl("/fail")        //로그인 실패시 이동할 URL
+        );
         return http.build();
     }
 }
